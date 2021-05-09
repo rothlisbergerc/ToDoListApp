@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDo list app</title>
+    <title>ToDo List App</title>
     <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css">
 </head>
 <body>
@@ -20,17 +19,18 @@
     <span>*</span>
     <br>
 
-    <input type="checkbox">
+    <input id="is-complete" type="checkbox">
     <label for="is-complete">Is Complete?</label>
-    <br>    
+    <br>
 
-    <input type="button" value="Add ToDo Item">
+    <input type="button" id="add" value="Add ToDo Item">
+    <br>
 
-    <script src="https://unpkg.com/js-datepicker"></script> <!-- https://www.npmjs.com/package/js-datepicker -->
+    <h3>ToDo Items</h3>
+    <div id="incomplete-items"></div>
+    <div id="complete-items"></div>
 
-    <script>
-        const picker = datepicker("#due-date");
-        picker.setMin(new Date()); // Set to today's date
-    </script>
+    <script src="https://unpkg.com/js-datepicker"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
