@@ -17,12 +17,21 @@ item.isCompleted = false;
 window.onload = function(){
     let addItem = document.getElementById("add");
     addItem.onclick = main;
+
+    loadSavedItem();
+
+}
+
+function loadSavedItem(){
+    let item = getToDo(); // read from web storage
+    displayToDoItem(item);
 }
 
 function main(){
     if(isValid()){
         let item = getToDoItem();
         displayToDoItem(item);
+        saveToDo(item);
     }
 }
 
@@ -68,7 +77,9 @@ function displayToDoItem(item:ToDoItem):void{
 
     // ex. <p>June 1st 2020</p>
     let itemDate = document.createElement("p");
-    itemDate.innerText = item.dueDate.toDateString();
+    // itemDate.innerText = item.dueDate.toDateString();
+    let dueDate = new Date(item.dueDate.toString());
+    itemDate.innerText = dueDate.toDateString();
 
     // ex. <div class="todo completed"></div> or <div class="todo"></div>
     let itemDiv = document.createElement("div");
@@ -105,3 +116,24 @@ function markAsComplete(){
 }
 
 // Task: Store ToDoItems in web storage
+
+// store a single todo item that you create
+function saveToDo(item:ToDoItem):void{
+    //convert our object into a string and save that string into web storage:
+
+    let itemString = JSON.stringify(item); // Convert ToDoItem into JSON string
+
+    localStorage.setItem(todokey, itemString); // Save string
+}
+
+const todokey = "todo";
+
+/**
+ * Get stored ToDo item or return null if
+ * none is found.
+ */
+function getToDo():ToDoItem{
+    let itemString = localStorage.getItem(todokey);
+    let item:ToDoItem = JSON.parse(itemString);
+    return item;
+}
